@@ -48,3 +48,7 @@ d = d.reshape((4, 4, -1))
 d = np.zeros_like(d)
 
 print(d)
+
+
+# 긴 텐서 끼리의 곱셈
+
