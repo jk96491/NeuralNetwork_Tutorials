@@ -19,6 +19,7 @@ x_train = torch.FloatTensor([[73, 80, 75],
 y_train = torch.FloatTensor([[152], [185], [180], [196], [142]])
 
 model = Model()
+
 optimizer = optim.SGD(model.parameters(), lr=0.0000452)
 
 nb_epochs = 50000
@@ -31,5 +32,4 @@ for epoch in range(nb_epochs + 1):
     cost.backward()
     optimizer.step()
 
-    print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
