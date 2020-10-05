@@ -8,19 +8,19 @@ from Utils import Tensorboard_Writer
 class BinaryClassifier(nn.Module):
     def __init__(self):
         super().__init__()
-        self.linear = nn.Linear(8, 64)
-        self.linear2 = nn.Linear(64, 64)
-        self.linear3 = nn.Linear(64, 64)
-        self.linear4 = nn.Linear(64, 1)
+        self.linear = nn.Linear(27, 128)
+        self.linear2 = nn.Linear(128, 128)
+        self.linear3 = nn.Linear(128, 128)
+        self.linear4 = nn.Linear(128, 7)
         self.Relu = nn.ReLU()
-        self.sigmoid = nn.Sigmoid()
+        self.softmax = nn.Softmax()
 
     def forward(self, x):
         x = self.Relu(self.linear(x))
         x = self.Relu(self.linear2(x))
         x = self.Relu(self.linear3(x))
 
-        x = self.sigmoid(self.linear4(x))
+        x = self.softmax(self.linear4(x))
 
         return x
 
@@ -29,9 +29,9 @@ tensorboard = Tensorboard_Writer("Test3")
 
 model = BinaryClassifier()
 
-xy = np.loadtxt('data-03-diabetes.csv', delimiter=',', dtype=np.float32)
-x_data = xy[:, 0:-1]
-y_data = xy[:, [-1]]
+xy = np.loadtxt('faults.csv', delimiter=',')
+x_data = xy[:, :27]
+y_data = xy[:, 27:]
 x_train = torch.FloatTensor(x_data)
 y_train = torch.FloatTensor(y_data)
 
@@ -40,8 +40,8 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 nb_epochs = 10000
 for epoch in range(nb_epochs + 1):
     hypothesis = model(x_train)
-    #cost = F.mse_loss(hypothesis, y_train)
-    cost = F.binary_cross_entropy(hypothesis, y_train)
+    output = torch.max(y_train, 1)[1]
+    cost = F.cross_entropy(hypothesis, output)
 
     optimizer.zero_grad()
     cost.backward()
@@ -49,14 +49,10 @@ for epoch in range(nb_epochs + 1):
 
     # 20번마다 로그 출력
     if epoch % 1 == 0:
-        prediction = hypothesis >= torch.FloatTensor([0.5])
-        correct_prediction = prediction.float() == y_train
-        accuracy = correct_prediction.sum().item() / len(correct_prediction)
-        print('Epoch {:4d}/{} Cost: {:.6f} Accuracy {:2.2f}%'.format(
-            epoch, nb_epochs, cost.item(), accuracy * 100,
+        print('Epoch {:4d}/{} Cost: {:.6f} '.format(
+            epoch, nb_epochs, cost.item(),
         ))
 
         tensorboard.WriteScalar("loss", epoch, cost)
-        tensorboard.WriteScalar("accuracy", epoch, accuracy)
 
 tensorboard.close()
