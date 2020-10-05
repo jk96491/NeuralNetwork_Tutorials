@@ -20,7 +20,9 @@ y_train = torch.FloatTensor([[152], [185], [180], [196], [142]])
 
 model = Model()
 
+optimizer = optim.RMSprop(model.parameters(), lr=0.0000452)
 optimizer = optim.SGD(model.parameters(), lr=0.0000452)
+optimizer = optim.Adam(model.parameters(), lr=0.0000452)
 
 nb_epochs = 50000
 for epoch in range(nb_epochs + 1):
