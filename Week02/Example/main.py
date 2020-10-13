@@ -19,6 +19,9 @@ a = np.array([[[1, 2],
 print("shape : {0}  value : {1}".format(a.shape, a))
 
 
+
+a = np.array([[[1, 2],
+              [3, 4]]])
 # reshape
 b = a.reshape(-1)
 print("shape : {0}  value : {1}".format(b.shape, b))
@@ -37,18 +40,37 @@ b = a.reshape(1, -1).squeeze()
 print("shape : {0}  value : {1}".format(b.shape, b))
 
 
+a = np.array([[[1, 2],
+              [3, 4]]])
 # zero_like
 c = np.zeros_like(a)
 print("shape : {0}  value : {1}".format(c.shape, c))
 
 
 # 긴 텐서 만들기
-d = np.arange(256)
-d = d.reshape((4, 4, -1))
-d = np.zeros_like(d)
+d = np.arange(32)
+d = d.reshape(4, -1)
 
 print(d)
 
 
-# 긴 텐서 끼리의 곱셈
+# 텐서 값 가져오기
+d = np.arange(32)
+d = d.reshape(4, -1)
+
+res = d[1:3, 1:3]
+
+print(res)
+
+
+# 텐서 곱셈
+a = np.arange(256)
+a = a.reshape(4, 4, 16)
+
+b = np.arange(256)
+b = b.reshape(4, 4, 16)
+
+res = np.matmul(a, b)
+
+print(res)
 
