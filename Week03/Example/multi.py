@@ -4,6 +4,8 @@ import torch.optim as optim
 import random
 import numpy as np
 
+print(torch.cuda.is_available())
+
 input_size = 3
 output_size = 1
 hidden_size = 10
