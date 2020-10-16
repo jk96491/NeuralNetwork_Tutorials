@@ -1,42 +1,47 @@
 import torch
-import torch.nn as nn
+from Week03.Example.Model import MyModel
 import torch.optim as optim
+import random
+import numpy as np
 
-class Model(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.fc1 = nn.Linear(3, 1)
-        self.Relu = nn.ReLU()
+input_size = 3
+output_size = 1
+hidden_size = 10
+hidden_dim = 128
 
-    def forward(self, x):
-        x = self.fc1(x)
-        return x
+subject_score_list = []
+final_score_list = []
 
-#0.25    0.75     0.5
-x_train = torch.FloatTensor([[73, 80, 75],
-                             [93, 88, 93],
-                             [89, 91, 90],
-                             [96, 98, 100],
-                             [73, 66, 70],
-                             [80, 75, 97],
-                             [45, 64, 84],
-                             [21, 85, 24],
-                             [32, 15, 84],
-                             [86, 21, 57]])
-y_train = torch.FloatTensor([[115.75], [135.75], [135], [147.5], [102.75],
-                             [124.75], [101.25], [81], [61.25], [65.75]])
+for i in range(100000):
+    kor = random.randrange(60, 100)
+    math = random.randrange(60, 100)
+    eng = random.randrange(60, 100)
+    subject_score_list.append([kor, math, eng])
 
-model = Model()
-optimizer = optim.Adam(model.parameters(), lr=0.01)
+    final_score = kor * 0.25 + math * 0.75 + eng * 0.5
 
-nb_epochs = 50000
+    final_score_list.append([final_score])
+
+x_train = torch.FloatTensor(subject_score_list)
+y_train = torch.FloatTensor(final_score_list)
+
+model = MyModel(hidden_size, input_size, output_size, hidden_dim)
+optimizer = optim.Adam(model.parameters(), lr=0.000452)
+
+nb_epochs = 5000
 for epoch in range(nb_epochs + 1):
-    prediction = model(x_train)
 
+    s = np.arange(x_train.shape[0])
+    np.random.shuffle(s)
+    x_train = x_train[s]
+    y_train = y_train[s]
+
+    prediction = model(x_train)
     cost = torch.mean((prediction - y_train)**2)
 
     optimizer.zero_grad()
     cost.backward()
     optimizer.step()
 
-    print('Epoch {:4d}/{} Cost: {:.6f} : weight {}'.format(epoch, nb_epochs, cost.item(), model.fc1.weight))
+    print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
+ #   print('Epoch {:4d}/{} Cost: {:.6f} weight : {}'.format(epoch, nb_epochs, cost.item(), model.layers[]))
