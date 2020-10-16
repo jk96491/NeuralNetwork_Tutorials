@@ -68,7 +68,7 @@ a = np.arange(256)
 a = a.reshape(4, 4, 16)
 
 b = np.arange(256)
-b = b.reshape(4, 4, 16)
+b = b.reshape(4, 16, 4)
 
 res = np.matmul(a, b)
 
