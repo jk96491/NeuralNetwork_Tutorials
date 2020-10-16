@@ -4,7 +4,7 @@ import torch.optim as optim
 import random
 import numpy as np
 
-print(torch.cuda.is_available())
+use_cuda = False
 
 input_size = 3
 output_size = 1
@@ -24,10 +24,16 @@ for i in range(100000):
 
     final_score_list.append([final_score])
 
-x_train = torch.FloatTensor(subject_score_list)
-y_train = torch.FloatTensor(final_score_list)
+if use_cuda:
+    x_train = torch.FloatTensor(subject_score_list).cuda()
+    y_train = torch.FloatTensor(final_score_list).cuda()
+    model = MyModel(hidden_size, input_size, output_size, hidden_dim).cuda()
+else:
+    x_train = torch.FloatTensor(subject_score_list)
+    y_train = torch.FloatTensor(final_score_list)
+    model = MyModel(hidden_size, input_size, output_size, hidden_dim)
 
-model = MyModel(hidden_size, input_size, output_size, hidden_dim)
+
 optimizer = optim.Adam(model.parameters(), lr=0.000452)
 
 nb_epochs = 5000
