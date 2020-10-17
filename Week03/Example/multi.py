@@ -4,23 +4,23 @@ import torch.optim as optim
 import random
 import numpy as np
 
-use_cuda = False
+use_cuda = True
 
 input_size = 3
 output_size = 1
-hidden_size = 10
-hidden_dim = 128
+hidden_size = 0
+hidden_dim = 1
 
 subject_score_list = []
 final_score_list = []
 
-for i in range(100000):
-    kor = random.randrange(60, 100)
-    math = random.randrange(60, 100)
-    eng = random.randrange(60, 100)
+for i in range(10000):
+    kor = random.randrange(10, 100)
+    math = random.randrange(10, 100)
+    eng = random.randrange(10, 100)
     subject_score_list.append([kor, math, eng])
 
-    final_score = kor * 0.25 + math * 0.75 + eng * 0.5
+    final_score = (kor + math + eng) / 3.0
 
     final_score_list.append([final_score])
 
@@ -34,22 +34,30 @@ else:
     model = MyModel(hidden_size, input_size, output_size, hidden_dim)
 
 
-optimizer = optim.Adam(model.parameters(), lr=0.000452)
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-nb_epochs = 5000
+nb_epochs = 15000
 for epoch in range(nb_epochs + 1):
 
     s = np.arange(x_train.shape[0])
     np.random.shuffle(s)
+
+    rand = random.randrange(50, 100)
+
     x_train = x_train[s]
     y_train = y_train[s]
 
-    prediction = model(x_train)
-    cost = torch.mean((prediction - y_train)**2)
+    x_train = x_train[:rand]
+    y_train = y_train[:rand]
+
+    prediction = model(x_train * 0.01)
+    cost = torch.mean((prediction - y_train * 0.01)**2)
 
     optimizer.zero_grad()
     cost.backward()
     optimizer.step()
 
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
- #   print('Epoch {:4d}/{} Cost: {:.6f} weight : {}'.format(epoch, nb_epochs, cost.item(), model.layers[]))
+    print(model.layers[0].weight.data[0])
+
+torch.save(model.state_dict(), 'Train_model/model.th')
