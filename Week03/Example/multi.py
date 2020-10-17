@@ -60,4 +60,5 @@ for epoch in range(nb_epochs + 1):
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
     print(model.layers[0].weight.data[0])
 
-torch.save(model.state_dict(), 'Train_model/model.th')
+    if epoch % 100 == 0:
+        torch.save(model.state_dict(), 'Train_model/model.th')
