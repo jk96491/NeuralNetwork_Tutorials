@@ -4,7 +4,7 @@ from Week03.Example.Model import MyModel
 input_size = 3
 output_size = 1
 hidden_size = 0
-hidden_dim = 128
+hidden_dim = 1
 
 model = MyModel(hidden_size, input_size, output_size, hidden_dim)
 

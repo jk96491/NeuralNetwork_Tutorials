@@ -4,17 +4,22 @@ import torch.optim as optim
 import random
 import numpy as np
 
-use_cuda = True
+use_cuda = False
 
 input_size = 3
 output_size = 1
 hidden_size = 0
 hidden_dim = 1
 
+min_len = 1000
+max_len = 1000000
+
+normalize = 1
+
 subject_score_list = []
 final_score_list = []
 
-for i in range(10000):
+for i in range(max_len):
     kor = random.randrange(10, 100)
     math = random.randrange(10, 100)
     eng = random.randrange(10, 100)
@@ -42,7 +47,7 @@ for epoch in range(nb_epochs + 1):
     s = np.arange(x_train.shape[0])
     np.random.shuffle(s)
 
-    rand = random.randrange(50, 100)
+    rand = random.randrange(min_len, max_len)
 
     x_train = x_train[s]
     y_train = y_train[s]
@@ -50,15 +55,15 @@ for epoch in range(nb_epochs + 1):
     x_train = x_train[:rand]
     y_train = y_train[:rand]
 
-    prediction = model(x_train * 0.01)
-    cost = torch.mean((prediction - y_train * 0.01)**2)
+    prediction = model(x_train * normalize)
+    cost = torch.mean((prediction - y_train * normalize)**2)
 
     optimizer.zero_grad()
     cost.backward()
     optimizer.step()
 
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
-    print(model.layers[0].weight.data[0])
+  #  print(model.layers[0].weight.data[0])
 
     if epoch % 100 == 0:
         torch.save(model.state_dict(), 'Train_model/model.th')
