@@ -2,7 +2,7 @@ import torch
 from Week03.Example.Model import MyModel
 import torch.optim as optim
 import random
-import numpy as np
+from Utils import SuffleData
 
 use_cuda = False
 
@@ -43,17 +43,8 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 nb_epochs = 15000
 for epoch in range(nb_epochs + 1):
-
-    s = np.arange(x_train.shape[0])
-    np.random.shuffle(s)
-
     rand = random.randrange(min_len, max_len)
-
-    x_train = x_train[s]
-    y_train = y_train[s]
-
-    x_train = x_train[:rand]
-    y_train = y_train[:rand]
+    x_train, y_train = SuffleData(x_train, y_train, rand)
 
     prediction = model(x_train * normalize)
     cost = torch.mean((prediction - y_train * normalize)**2)

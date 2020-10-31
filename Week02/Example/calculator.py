@@ -15,9 +15,9 @@ class SetData:
         self.y = y
 
 
-class calculator(SetData):
+class Mycalculator(SetData):
     def __init__(self):
-        super(calculator, self).__init__()
+        super(Mycalculator, self).__init__()
         print("자식 클래스 초기화")
 
     def Add(self):
@@ -29,7 +29,7 @@ class calculator(SetData):
         return res
 
 
-cal = calculator()
+cal = Mycalculator()
 
 cal.SetXandY(10, 20)
 cal.SetX(30)

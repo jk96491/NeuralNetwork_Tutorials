@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from Utils import Tensorboard_Writer
+
 
 class Model(nn.Module):
     def __init__(self):
@@ -24,6 +26,8 @@ optimizer = optim.RMSprop(model.parameters(), lr=0.0000452)
 optimizer = optim.SGD(model.parameters(), lr=0.0000452)
 optimizer = optim.Adam(model.parameters(), lr=0.0000452)
 
+tensorboard = Tensorboard_Writer("Test_tensorboard")
+
 nb_epochs = 50000
 for epoch in range(nb_epochs + 1):
     prediction = model(x_train)
@@ -35,3 +39,7 @@ for epoch in range(nb_epochs + 1):
     optimizer.step()
 
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
+
+    tensorboard.WriteScalar("loss", epoch, cost)
+
+tensorboard.close()
