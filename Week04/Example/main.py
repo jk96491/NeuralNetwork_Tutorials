@@ -7,10 +7,16 @@ from Utils import Tensorboard_Writer
 class Model(nn.Module):
     def __init__(self):
         super().__init__()
-        self.linear = nn.Linear(3, 1)
+        self.fc1 = nn.Linear(3, 6)
+        self.fc2 = nn.Linear(6, 6)
+        self.fc3 = nn.Linear(6, 1)
 
     def forward(self, x):
-        return self.linear(x)
+        x = self.fc1(x)
+        x = self.fc2(x)
+        x = self.fc3(x)
+
+        return x
 
 
 x_train = torch.FloatTensor([[73, 80, 75],
@@ -22,18 +28,16 @@ y_train = torch.FloatTensor([[152], [185], [180], [196], [142]])
 
 model = Model()
 
-optimizer = optim.RMSprop(model.parameters(), lr=0.0000452)
-optimizer = optim.SGD(model.parameters(), lr=0.0000452)
 optimizer = optim.Adam(model.parameters(), lr=0.0000452)
 
-tensorboard = Tensorboard_Writer("Test_tensorboard")
+tensorboard = Tensorboard_Writer("Test_tensorboard_Adam")
 
 nb_epochs = 50000
 for epoch in range(nb_epochs + 1):
     prediction = model(x_train)
 
     cost = torch.mean((prediction - y_train)**2)
-
+    cost = torch.nn.CrossEntropyLoss(prediction, y_train)
     optimizer.zero_grad()
     cost.backward()
     optimizer.step()

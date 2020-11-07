@@ -7,7 +7,7 @@ y_train = torch.FloatTensor([[5], [8], [11]])
 w = torch.zeros(1, requires_grad=True)
 b = torch.zeros(1, requires_grad=True)
 
-optimizer = optim.SGD([w, b], lr=0.05)
+optimizer = optim.Adam([w, b], lr=0.001)
 
 epoch = 10000
 

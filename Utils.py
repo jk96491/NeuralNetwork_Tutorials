@@ -1,5 +1,4 @@
 from torch.utils.tensorboard import SummaryWriter
-import random
 import numpy as np
 
 class Tensorboard_Writer:

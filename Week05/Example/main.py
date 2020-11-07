@@ -48,7 +48,7 @@ for epoch in range(nb_epochs + 1):
     optimizer.step()
 
     # 20번마다 로그 출력
-    if epoch % 1 == 0:
+    if epoch % 20 == 0:
         prediction = hypothesis >= torch.FloatTensor([0.5])
         correct_prediction = prediction.float() == y_train
         accuracy = correct_prediction.sum().item() / len(correct_prediction)

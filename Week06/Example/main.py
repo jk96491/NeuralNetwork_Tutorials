@@ -39,7 +39,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 nb_epochs = 10000
 for epoch in range(nb_epochs + 1):
-    x_train, y_train = SuffleData(x_train, y_train, 10)
+    x_train, y_train = SuffleData(x_train, y_train, 5)
 
     hypothesis = model(x_train)
     output = torch.max(y_train, 1)[1]

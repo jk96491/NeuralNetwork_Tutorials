@@ -4,30 +4,30 @@ import torch.optim as optim
 import random
 from Utils import SuffleData
 
-use_cuda = False
+use_cuda = True
 
 input_size = 3
 output_size = 1
-hidden_size = 0
-hidden_dim = 1
+hidden_size = 20
+hidden_dim = 128
 
 min_len = 1000
-max_len = 1000000
+max_len = 100000
 
-normalize = 1
+normalize = 0.01
 
 subject_score_list = []
 final_score_list = []
 
 for i in range(max_len):
-    kor = random.randrange(10, 100)
-    math = random.randrange(10, 100)
-    eng = random.randrange(10, 100)
+    kor = random.randrange(10, 100) * normalize
+    math = random.randrange(10, 100) * normalize
+    eng = random.randrange(10, 100) * normalize
     subject_score_list.append([kor, math, eng])
 
     final_score = (kor + math + eng) / 3.0
 
-    final_score_list.append([final_score])
+    final_score_list.append([final_score * normalize])
 
 if use_cuda:
     x_train = torch.FloatTensor(subject_score_list).cuda()
@@ -46,15 +46,15 @@ for epoch in range(nb_epochs + 1):
     rand = random.randrange(min_len, max_len)
     x_train, y_train = SuffleData(x_train, y_train, rand)
 
-    prediction = model(x_train * normalize)
-    cost = torch.mean((prediction - y_train * normalize)**2)
+    prediction = model(x_train)
+    cost = torch.mean((prediction - y_train)**2)
 
     optimizer.zero_grad()
     cost.backward()
     optimizer.step()
 
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost.item()))
-  #  print(model.layers[0].weight.data[0])
+    #print(model.layers[0].weight.data[0])
 
     if epoch % 100 == 0:
         torch.save(model.state_dict(), 'Train_model/model.th')
