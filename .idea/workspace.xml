@@ -25,7 +25,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DeepLearning_Raw" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/slac.pytorch-master" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -37,8 +37,8 @@
       <recent name="C:\Users\JGY\Desktop\CMS_EDU\trunk\Week03\Example" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.multi">
-    <configuration name="Temp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="Predict" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CMS_EDU" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -46,11 +46,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week07" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week01" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week07/Temp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week01/Predict.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Temp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CMS_EDU" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week01" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week01/Temp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -67,11 +88,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week06/Example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week08/Example" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week06/Example/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week08/Example/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -122,34 +143,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="multi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="CMS_EDU" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week03/Example" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week03/Example/multi.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.multi" />
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.main (2)" />
-        <item itemvalue="Python.Temp" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.Predict" />
+        <item itemvalue="Python.Temp (1)" />
+        <item itemvalue="Python.main (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -171,34 +171,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602565121618" />
-    <state width="1396" height="466" key="DebuggerActiveHint" timestamp="1604113240588">
+    <state width="1396" height="466" key="DebuggerActiveHint" timestamp="1604746605125">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1396" height="466" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604113240588" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1604112283602">
+    <state width="1396" height="466" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604746605125" />
+    <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1604365376748">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604211250709" />
+    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1604365376748" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1604746746155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604112283602" />
-    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602554818938" />
-    <state width="1899" height="270" key="GridCell.Tab.0.bottom" timestamp="1604114014978">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604114014978" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604746746155" />
     <state width="1899" height="270" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
-    <state width="1899" height="270" key="GridCell.Tab.0.center" timestamp="1604114014978">
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1604746746155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604114014978" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604746746155" />
     <state width="1899" height="270" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
-    <state width="1899" height="270" key="GridCell.Tab.0.left" timestamp="1604114014978">
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1604746746155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604114014978" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604746746155" />
     <state width="1899" height="270" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
-    <state width="1899" height="270" key="GridCell.Tab.0.right" timestamp="1604114014978">
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1604746746155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604114014978" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604746746155" />
     <state width="1899" height="270" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1602834756106">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -208,14 +208,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601865706211" />
-    <state x="1920" y="0" width="1542" height="1027" maximized="true" key="dock-window-1" timestamp="1604111934471">
+    <state x="1920" y="0" width="1542" height="1027" key="dock-window-1" timestamp="1604667247418">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1920" y="0" width="1542" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604111934471" />
+    <state x="1920" y="0" width="1542" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604667247418" />
     <state x="1920" y="43" width="1542" height="729" maximized="true" key="dock-window-2" timestamp="1604113644035">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="1920" y="43" width="1542" height="729" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604113644035" />
+    <state x="653" y="251" width="613" height="538" key="find.popup" timestamp="1604744294953">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="653" y="251" width="613" height="538" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604744294953" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601860937704">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
