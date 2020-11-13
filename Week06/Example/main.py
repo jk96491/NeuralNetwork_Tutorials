@@ -6,7 +6,7 @@ import numpy as np
 from Utils import Tensorboard_Writer
 from Utils import SuffleData
 
-class BinaryClassifier(nn.Module):
+class Classifier(nn.Module):
     def __init__(self):
         super().__init__()
         self.linear = nn.Linear(27, 128)
@@ -27,7 +27,7 @@ class BinaryClassifier(nn.Module):
 
 tensorboard = Tensorboard_Writer("Test3")
 
-model = BinaryClassifier()
+model = Classifier()
 
 xy = np.loadtxt('faults.csv', delimiter=',')
 x_data = xy[:, :-7]
