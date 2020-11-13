@@ -119,13 +119,13 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
 
-            running_loss += loss.data[0]
+            running_loss += loss.item()
 
             prediction = torch.max(outputs.data, 1)[1]
 
             correct += prediction.eq(labels.data.view_as(prediction)).cpu().sum()
 
-            if i % 2000 == 1999:
+            if i % 10 == 9:
                 print('[%d, %5d] loss: %.6f acc : %.6f' % (
                 epoch + 1, i + 1, running_loss / 2000, 100 * correct / ((i + 1) * 4)))
                 running_loss = 0.0
