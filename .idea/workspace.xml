@@ -21,7 +21,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/slac.pytorch-master" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/Testing" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -33,8 +33,8 @@
       <recent name="C:\Users\JGY\Desktop\CMS_EDU\trunk\Week03\Example" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main2 (1)">
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.CartPole_Q">
+    <configuration name="CartPole_Q" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CMS_EDU" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -42,11 +42,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week06/Example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week11/Example" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week06/Example/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week11/Example/CartPole_Q.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -55,7 +55,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="FrozenLake_Q_Learning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CMS_EDU" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -63,11 +63,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week04/Example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Week10/Example" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week04/Example/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Week10/Example/FrozenLake_Q_Learning.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.CartPole_Q" />
+        <item itemvalue="Python.FrozenLake_Q_Learning" />
         <item itemvalue="Python.main2 (1)" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.main2" />
-        <item itemvalue="Python.main (2)" />
-        <item itemvalue="Python.main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -180,38 +180,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="676" y="145" key="#main2_(1)/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605267163516" />
-    <state width="1396" height="466" key="DebuggerActiveHint" timestamp="1605266391984">
+    <state width="1396" height="466" key="DebuggerActiveHint" timestamp="1605270134798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1396" height="466" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605266391984" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1604371771090">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1396" height="466" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605270134798" />
+    <state x="2592" y="265" key="FileChooserDialogImpl" timestamp="1605269145872">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604112283602" />
+    <state x="2592" y="265" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605269145872" />
     <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602554818938" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604371771090" />
-    <state width="1899" height="270" key="GridCell.Tab.0.bottom" timestamp="1605268115780">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1605270367895">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605268115780" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605270367895" />
     <state width="1899" height="270" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
     <state width="1899" height="188" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604127232389" />
-    <state width="1899" height="270" key="GridCell.Tab.0.center" timestamp="1605268115780">
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1605270367895">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605268115780" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605270367895" />
     <state width="1899" height="270" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
     <state width="1899" height="188" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604127232389" />
-    <state width="1899" height="270" key="GridCell.Tab.0.left" timestamp="1605268115780">
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1605270367895">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605268115780" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605270367895" />
     <state width="1899" height="270" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
     <state width="1899" height="188" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604127232389" />
-    <state width="1899" height="270" key="GridCell.Tab.0.right" timestamp="1605268115780">
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1605270367895">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="270" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605268115780" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605270367895" />
     <state width="1899" height="270" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602813430514" />
     <state width="1899" height="188" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604127232389" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1605263488636">
@@ -226,13 +226,24 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="1920" y="0" width="1542" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605265087082" />
-    <state x="1920" y="43" width="1542" height="729" maximized="true" key="dock-window-2" timestamp="1604113644035">
+    <state x="2129" y="0" width="1542" height="1027" maximized="true" key="dock-window-2" timestamp="1605270089364">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1920" y="43" width="1542" height="729" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604113644035" />
+    <state x="2129" y="0" width="1542" height="1027" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605270089364" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601860937704">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601860937704" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Week10/Example/FrozenLake_Q_Learning.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
