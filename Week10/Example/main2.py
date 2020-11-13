@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+
 def make_batch():
     input_batch = []
     target_batch = []
@@ -16,6 +17,7 @@ def make_batch():
         target_batch.append(target)
 
     return input_batch, target_batch
+
 
 class TextRNN(nn.Module):
     def __init__(self):
@@ -32,6 +34,7 @@ class TextRNN(nn.Module):
         outputs = outputs[-1] # [batch_size, num_directions(=1) * n_hidden]
         model = self.W(outputs) + self.b # model : [batch_size, n_class]
         return model
+
 
 if __name__ == '__main__':
     n_step = 2 # number of cells(= number of Step)
