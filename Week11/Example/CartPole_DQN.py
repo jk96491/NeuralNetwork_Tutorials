@@ -78,7 +78,7 @@ def update_target(mainDQN, targetDQN):
     targetDQN.load_state_dict(mainDQN.state_dict())
 
 
-def main():
+def running():
     max_episode = 5000
     replay_buffer = deque()
 
@@ -134,6 +134,7 @@ def main():
 
     bot_play(mainDQN)
 
-main()
+    env.close()
 
-env.close()
+running()
+
