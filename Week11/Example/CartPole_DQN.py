@@ -76,7 +76,7 @@ def bot_play(mainDQN):
             break
 
 
-def get_copy_var_ops(mainDQN, targetDQN):
+def update_target(mainDQN, targetDQN):
     targetDQN.load_state_dict(mainDQN.state_dict())
 
 def main():
@@ -86,7 +86,7 @@ def main():
     mainDQN = DQN(input_size, output_size)
     targetDQN = DQN(input_size, output_size)
 
-    get_copy_var_ops(mainDQN, targetDQN)
+    update_target(mainDQN, targetDQN)
 
     optimizer = torch.optim.Adam(mainDQN.parameters(), lr=1e-1)
 
@@ -133,7 +133,7 @@ def main():
                 minibatch = random.sample(replay_buffer, 5)
                 loss = simple_replay_train(mainDQN, targetDQN, minibatch, optimizer)
             print("Loss", loss.item())
-            get_copy_var_ops(mainDQN, targetDQN)
+            update_target(mainDQN, targetDQN)
 
     bot_play(mainDQN)
 
