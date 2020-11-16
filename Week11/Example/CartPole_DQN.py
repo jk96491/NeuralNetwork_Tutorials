@@ -31,7 +31,7 @@ class DQN(nn.Module):
         return q_val
 
 
-def simple_replay_train(mainDQN, targetDQN, train_batch, optimizer):
+def simple_replay_train(mainDQN, targetDQN, train_batch):
     Q_val_List = []
     Q_target_val_List = []
 
@@ -51,10 +51,6 @@ def simple_replay_train(mainDQN, targetDQN, train_batch, optimizer):
     Q_val_List = torch.stack(Q_val_List).squeeze(1)
     Q_target_val_List = torch.stack(Q_target_val_List).squeeze(1)
     loss = torch.mean((Q_val_List - Q_target_val_List) ** 2)
-
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
 
     return loss
 
@@ -128,7 +124,13 @@ def running():
         if episode % 10 == 1:
             for _ in range(50):
                 minibatch = random.sample(replay_buffer, 5)
-                loss = simple_replay_train(mainDQN, targetDQN, minibatch, optimizer)
+
+                loss = simple_replay_train(mainDQN, targetDQN, minibatch)
+
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+
             print("Loss", loss.item())
             update_target(mainDQN, targetDQN)
 
