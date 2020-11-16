@@ -4,7 +4,7 @@ from collections import deque
 import gym
 import torch.nn as nn
 import torch
-import torch.optim as optim
+from Utils import convertToTensorInput
 
 env = gym.make('CartPole-v0')
 
@@ -36,10 +36,8 @@ def simple_replay_train(mainDQN, targetDQN, train_batch, optimizer):
     Q_target_val_List = []
 
     for state, action, reward, next_state, done in train_batch:
-        state = np.reshape(state, [1, input_size])
-        Q = mainDQN(torch.FloatTensor(state))
-        next_state = np.reshape(next_state, [1, input_size])
-        Q1 = targetDQN(torch.FloatTensor(next_state))
+        Q = mainDQN(convertToTensorInput(state, input_size))
+        Q1 = targetDQN(convertToTensorInput(next_state, input_size))
         maxQ1 = torch.max(Q1.data)
 
         if done:
@@ -79,6 +77,7 @@ def bot_play(mainDQN):
 def update_target(mainDQN, targetDQN):
     targetDQN.load_state_dict(mainDQN.state_dict())
 
+
 def main():
     max_episode = 5000
     replay_buffer = deque()
@@ -102,8 +101,7 @@ def main():
             if np.random.rand(1) < e:
                 action = env.action_space.sample()
             else:
-                state = np.reshape(state, [1, input_size])
-                q_val = mainDQN(torch.FloatTensor(state))
+                q_val = mainDQN(convertToTensorInput(state, input_size))
                 _, action = torch.max(q_val, 1)
                 action = action.data[0].item()
 
@@ -125,7 +123,6 @@ def main():
         print("Episode: {} steps: {}".format(episode, step_count))
         if step_count > 10000:
             pass
-
 
         # 10회 주기로 미니배칭하여 타켓 신경망 업데이트
         if episode % 10 == 1:

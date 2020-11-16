@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Variable
+from Utils import convertToTensorInput
 
 env = gym.make("CartPole-v0")
 env.reset()
@@ -41,8 +42,7 @@ for i in range(num_episode):
 
     while not done:
         step_count += 1
-        x = np.reshape(s, [1, input_size])
-        Qs = model(torch.FloatTensor(x))
+        Qs = model(convertToTensorInput(s, input_size))
 
         if np.random.rand(1) < e:
             action = env.action_space.sample()
@@ -52,7 +52,7 @@ for i in range(num_episode):
 
         new_state, reward, done, _ = env.step(action)
 
-        Q1 = model(torch.FloatTensor(new_state))
+        Q1 = model(convertToTensorInput(new_state, input_size))
         maxQ1 = torch.max(Q1.data)
 
         targetQ = Variable(Qs.data, requires_grad=False)
@@ -62,7 +62,7 @@ for i in range(num_episode):
         else:
             targetQ[0, action] = reward + torch.mul(maxQ1, dis)
 
-        output = model(torch.FloatTensor(x))
+        output = model(convertToTensorInput(s, input_size))
         loss = torch.mean((output - targetQ) ** 2)
 
         optimizer.zero_grad()
