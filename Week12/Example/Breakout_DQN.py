@@ -5,10 +5,11 @@ import gym
 import torch.nn as nn
 import torch
 from Utils import convertToTensorInput
+import torch.nn.functional as F
 
-env = gym.make('CartPole-v0')
+env = gym.make('Breakout-v0')
 
-input_size = 4
+input_size = env.observation_space.shape
 output_size = 2
 
 dis = 0.9
@@ -16,19 +17,27 @@ REPLAY_MEMORY = 50000
 
 
 class DQN(nn.Module):
-    def __init__(self, input_size, output_size):
+    def __init__(self, h, w, outputs):
         super(DQN, self).__init__()
-        self.input_size = input_size
-        self.output_size = output_size
+        self.conv1 = nn.Conv2d(4, 32, kernel_size=8, stride=4, bias=False)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2, bias=False)
+        self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1, bias=False)
+        self.fc1 = nn.Linear(64 * 7 * 7, 512)
+        self.fc2 = nn.Linear(512, outputs)
 
-        self.fc1 = nn.Linear(input_size, 10)
-        self.fc2 = nn.Linear(10, output_size)
+    def forward(self, x):
+        x = x.to(self.device).float() / 255.
+        x = F.relu(self.conv1(x))
+        x = F.relu(self.conv2(x))
+        x = F.relu(self.conv3(x))
+        x = F.relu(self.fc1(x.view(x.size(0), -1)))
+        return self.fc2(x)
 
-    def forward(self, state):
-        x = self.fc1(state)
-        q_val = self.fc2(x)
 
-        return q_val
+def fp(n_frame):
+    n_frame = torch.from_numpy(n_frame)
+    h = n_frame.shape[-2]
+    return n_frame.view(1,h,h)
 
 
 def simple_replay_train(mainDQN, targetDQN, train_batch, optimizer):
@@ -81,9 +90,11 @@ def update_target(mainDQN, targetDQN):
 def running():
     max_episode = 5000
     replay_buffer = deque()
+    c, h, w = fp(env.reset()).shape
+    n_actions = env.action_space.n
 
-    mainDQN = DQN(input_size, output_size)
-    targetDQN = DQN(input_size, output_size)
+    mainDQN = DQN(h, w, n_actions)
+    targetDQN = DQN(h, w, n_actions)
 
     update_target(mainDQN, targetDQN)
 
