@@ -7,17 +7,17 @@ import torch
 from Utils import convertToTensorInput
 import torch.nn.functional as F
 
-env = gym.make('Breakout-v0')
+env = gym.make('BreakoutDeterministic-v4')
 
-input_size = env.observation_space.shape
-output_size = 2
+input_size = env.observation_space.shape[0]
+output_size = env.action_space.n
 
 dis = 0.9
 REPLAY_MEMORY = 50000
 
 
 class DQN(nn.Module):
-    def __init__(self, h, w, outputs):
+    def __init__(self, outputs):
         super(DQN, self).__init__()
         self.conv1 = nn.Conv2d(4, 32, kernel_size=8, stride=4, bias=False)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2, bias=False)
@@ -37,7 +37,7 @@ class DQN(nn.Module):
 def fp(n_frame):
     n_frame = torch.from_numpy(n_frame)
     h = n_frame.shape[-2]
-    return n_frame.view(1,h,h)
+    return n_frame.view(1, h, h)
 
 
 def simple_replay_train(mainDQN, targetDQN, train_batch, optimizer):
@@ -90,11 +90,12 @@ def update_target(mainDQN, targetDQN):
 def running():
     max_episode = 5000
     replay_buffer = deque()
-    c, h, w = fp(env.reset()).shape
+    #c, h, w = fp(env.reset()).shape
+    state = env.reset()
     n_actions = env.action_space.n
 
-    mainDQN = DQN(h, w, n_actions)
-    targetDQN = DQN(h, w, n_actions)
+    mainDQN = DQN(n_actions)
+    targetDQN = DQN(n_actions)
 
     update_target(mainDQN, targetDQN)
 
