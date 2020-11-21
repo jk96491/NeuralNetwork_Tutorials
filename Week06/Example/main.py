@@ -9,10 +9,10 @@ from Utils import SuffleData
 class Classifier(nn.Module):
     def __init__(self):
         super().__init__()
-        self.linear = nn.Linear(27, 128)
-        self.linear2 = nn.Linear(128, 128)
-        self.linear3 = nn.Linear(128, 128)
-        self.linear4 = nn.Linear(128, 7)
+        self.linear = nn.Linear(27, 64)
+        self.linear2 = nn.Linear(64, 64)
+        self.linear3 = nn.Linear(64, 64)
+        self.linear4 = nn.Linear(64, 7)
         self.Relu = nn.ReLU()
 
     def forward(self, x):
@@ -39,7 +39,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 nb_epochs = 10000
 for epoch in range(nb_epochs + 1):
-    x_train, y_train = SuffleData(x_train, y_train, 5)
+    x_train, y_train = SuffleData(x_train, y_train, 10)
 
     hypothesis = model(x_train)
     output = torch.max(y_train, 1)[1]
