@@ -6,7 +6,7 @@ from Advanced.Resnet.Utils import conv1x1
 
 class ResNet(nn.Module):
     # model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs) #resnet 50
-    def __init__(self, block, layers, num_classes=10, zero_init_residual=False):
+    def __init__(self, block, layers, num_classes=10, zero_init_residual=True):
         super(ResNet, self).__init__()
 
         self.inplanes = 64
