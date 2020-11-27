@@ -2,6 +2,7 @@ import torch
 import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 import torch.nn.init
+from Advanced.Resnet import ResNet
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -70,7 +71,9 @@ class CNN(torch.nn.Module):
         return out
 
 
-model = CNN().to(device)
+#model = CNN().to(device)
+
+model = ResNet.resnet50().to(device)
 
 criterion = torch.nn.CrossEntropyLoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
