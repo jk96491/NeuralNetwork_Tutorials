@@ -74,7 +74,7 @@ class CNN(torch.nn.Module):
 
 
 #model = CNN()
-model = ResNet.resnet10()
+model = ResNet.resnet4()
 
 if torch.cuda.device_count() > 1:
     print("Let's use", torch.cuda.device_count(), "GPUs!")
