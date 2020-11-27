@@ -4,6 +4,7 @@ import torchvision.transforms as transforms
 import torch.nn.init
 from Advanced.Resnet import ResNet
 import torch.nn as nn
+from Utils import SuffleData
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -14,7 +15,7 @@ if device == 'cuda':
 
 learning_rate = 0.001
 training_epochs = 15
-batch_size = 100
+batch_size = 1000
 
 mnist_train = dsets.MNIST(root='MNIST_data/',
                           train=True,
@@ -72,9 +73,9 @@ class CNN(torch.nn.Module):
         return out
 
 
-#model = CNN()
+model = CNN()
 
-model = ResNet.resnet50()
+#model = ResNet.resnet50()
 
 if torch.cuda.device_count() > 1:
     print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -98,6 +99,8 @@ for epoch in range(training_epochs):
     for X, Y in data_loader:
         X = X.to(device)
         Y = Y.to(device)
+
+        X, Y = SuffleData(X, Y, batch_size)
 
         hypothesis = model(X)
         cost = criterion(hypothesis, Y)
