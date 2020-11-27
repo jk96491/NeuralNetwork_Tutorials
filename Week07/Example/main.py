@@ -98,7 +98,7 @@ for epoch in range(training_epochs):
         optimizer.step()
 
         avg_cost += cost / total_batch
-        print('[index: {:>4}] cost = {:>.9}'.format(index + 1, cost))
+        print('[Epoch: {:>2} index: {:>4}] cost = {:>.9}'.format(epoch + 1, index + 1, cost))
         index += 1
 
     print('[Epoch: {:>4}] avg_cost = {:>.9}'.format(epoch + 1, avg_cost))
