@@ -9,17 +9,22 @@ class Bottleneck(nn.Module):
     def __init__(self, inplanes, planes, stride=1, downsample=None):
         super(Bottleneck, self).__init__()
 
+        self.bn1 = nn.BatchNorm2d(planes)
+        self.bn2 = nn.BatchNorm2d(planes)
+        self.bn3 = nn.BatchNorm2d(planes * self.expansion)
+        self.relu = nn.ReLU(inplace=True)
+
         # 1 X 1
         self.Layer1 = nn.Sequential(conv1x1(inplanes, planes),
-                                    nn.BatchNorm2d(planes),
-                                    nn.ReLU(inplace=True))
+                                    self.bn1,
+                                    self.relu)
         # 3 X 3
         self.Layer2 = nn.Sequential(conv3x3(planes, planes, stride),
-                                    nn.BatchNorm2d(planes),
-                                    nn.ReLU(inplace=True))
+                                    self.bn2,
+                                    self.relu)
         # 1 X 1
         self.Layer3 = nn.Sequential(conv1x1(planes, planes * self.expansion),
-                                    nn.BatchNorm2d(planes * self.expansion))
+                                    self.bn3)
 
         self.downsample = downsample
         self.stride = stride
@@ -35,6 +40,6 @@ class Bottleneck(nn.Module):
             identity = self.downsample(x)
 
         out += identity
-        out = nn.ReLU(inplace=True)(out)
+        out = self.relu(out)
 
         return out
