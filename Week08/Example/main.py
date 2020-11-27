@@ -13,6 +13,7 @@ testdir = '..\\Data\\catdog\\test'
 
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 
+
 class TrainImageFolder(datasets.ImageFolder):
 
     def __getitem__(self, index):
@@ -59,6 +60,7 @@ test_loader = data.DataLoader(
     num_workers=1,
     pin_memory=False)
 
+
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -84,12 +86,11 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(512, 128)
         self.fc3 = nn.Linear(128, 2)
 
-
     def forward(self, x):
         x = self.conv1(x)
         x = self.conv2(x)
         x = self.conv3(x)
-
+        x = self.conv4(x)
 
         x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
@@ -99,8 +100,8 @@ class Net(nn.Module):
 
 
 if __name__ == '__main__':
-   # net = Net()
-    net = ResNet.resnet50(3)
+    net = Net()
+    #net = ResNet.resnet50(3)
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         net = nn.DataParallel(net)
