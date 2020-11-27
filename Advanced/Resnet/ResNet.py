@@ -6,20 +6,21 @@ from Advanced.Resnet.Utils import conv1x1
 
 class ResNet(nn.Module):
     # model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs) #resnet 50
-    def __init__(self, block, layers, num_classes=10, zero_init_residual=True):
+    def __init__(self, input_channel ,block, layers, num_classes=10, zero_init_residual=True):
         super(ResNet, self).__init__()
 
         self.inplanes = 64
 
-        self.inputLayer = nn.Sequential(nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False),
+        self.inputLayer = nn.Sequential(nn.Conv2d(input_channel, 64, kernel_size=7, stride=2, padding=3, bias=False),
                                        nn.BatchNorm2d(64),
                                        nn.ReLU(inplace=True),
                                        nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 
-        self.layer1 = self._make_layer(block, 64, layers[0])
-        self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
-        self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
-        self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
+        self.inputLayer2 = nn.Sequential(self._make_layer(block, 64, layers[0]),
+                                         self._make_layer(block, 128, layers[1], stride=2),
+                                         self._make_layer(block, 256, layers[2], stride=2),
+                                         self._make_layer(block, 512, layers[3], stride=2))
+
 
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(512 * block.expansion, num_classes)
@@ -63,29 +64,25 @@ class ResNet(nn.Module):
 
     def forward(self, x):
         x = self.inputLayer(x)
-
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
-
+        x = self.inputLayer2(x)
         x = self.avgpool(x)
+
         x = x.view(x.size(0), -1)
         x = self.fc(x)
 
         return x
 
 
-def resnet18(pretrained=False, **kwargs):
-    model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs) #=> 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
+def resnet18(input_Channel, **kwargs):
+    model = ResNet(input_Channel, BasicBlock, [2, 2, 2, 2], **kwargs) #=> 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
     return model
 
 
-def resnet50(pretrained=False, **kwargs):
-    model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs) #=> 3*(3+4+6+3) +(conv1) +1(fc) = 48 +2 = 50
+def resnet50(input_Channel, **kwargs):
+    model = ResNet(input_Channel, Bottleneck, [3, 4, 6, 3], **kwargs) #=> 3*(3+4+6+3) +(conv1) +1(fc) = 48 +2 = 50
     return model
 
 
-def resnet152(pretrained=False, **kwargs):
-    model = ResNet(Bottleneck, [3, 8, 36, 3], **kwargs) # 3*(3+8+36+3) +2 = 150+2 = resnet152
+def resnet152(input_Channel, **kwargs):
+    model = ResNet(input_Channel, Bottleneck, [3, 8, 36, 3], **kwargs) # 3*(3+8+36+3) +2 = 150+2 = resnet152
     return model
