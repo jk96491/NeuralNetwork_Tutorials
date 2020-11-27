@@ -37,3 +37,7 @@ CartPole 강화학습 하기(Q-Learning, DQN)
 # Week12
 BreakOut 강화학습 하기(DQN)
 CartPole 강화학습 하기(REINFORCE)
+
+# Advanced
+여러가지 모델들 종합
+GAN, ResNet, Transformer, VAE
