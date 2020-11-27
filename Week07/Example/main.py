@@ -15,7 +15,7 @@ if device == 'cuda':
 
 learning_rate = 0.001
 training_epochs = 15
-batch_size = 1000
+batch_size = 100
 
 mnist_train = dsets.MNIST(root='MNIST_data/',
                           train=True,
@@ -38,6 +38,7 @@ class CNN(torch.nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
         self.keep_prob = 0.5
+
         self.layer1 = torch.nn.Sequential(
             torch.nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1),
             torch.nn.ReLU(),
@@ -74,7 +75,7 @@ class CNN(torch.nn.Module):
 
 
 #model = CNN()
-model = ResNet.resnet4()
+model = ResNet.resnet50(1)
 
 if torch.cuda.device_count() > 1:
     print("Let's use", torch.cuda.device_count(), "GPUs!")
