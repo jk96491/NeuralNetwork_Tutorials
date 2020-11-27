@@ -6,17 +6,15 @@ from Advanced.Resnet.Utils import conv1x1
 
 class ResNet(nn.Module):
     # model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs) #resnet 50
-    def __init__(self, block, layers, num_classes=1000, zero_init_residual=False):
+    def __init__(self, block, layers, num_classes=10, zero_init_residual=False):
         super(ResNet, self).__init__()
 
         self.inplanes = 64
 
-        self.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
-
-        self.bn1 = nn.BatchNorm2d(64)
-        self.relu = nn.ReLU(inplace=True)
-
-        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        self.inputLayer = nn.Sequential(nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False),
+                                       nn.BatchNorm2d(64),
+                                       nn.ReLU(inplace=True),
+                                       nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 
         self.layer1 = self._make_layer(block, 64, layers[0])
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
@@ -64,10 +62,7 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.relu(x)
-        x = self.maxpool(x)
+        x = self.inputLayer(x)
 
         x = self.layer1(x)
         x = self.layer2(x)
@@ -80,21 +75,16 @@ class ResNet(nn.Module):
 
         return x
 
-def resnet4(pretrained=False, **kwargs):
-    model = ResNet(BasicBlock, [1, 0, 1, 0], **kwargs)  # => 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
-    return model
-
-def resnet10(pretrained=False, **kwargs):
-    model = ResNet(BasicBlock, [1, 1, 1, 1], **kwargs) #=> 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
-    return model
 
 def resnet18(pretrained=False, **kwargs):
     model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs) #=> 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
     return model
 
+
 def resnet50(pretrained=False, **kwargs):
     model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs) #=> 3*(3+4+6+3) +(conv1) +1(fc) = 48 +2 = 50
     return model
+
 
 def resnet152(pretrained=False, **kwargs):
     model = ResNet(Bottleneck, [3, 8, 36, 3], **kwargs) # 3*(3+8+36+3) +2 = 150+2 = resnet152
