@@ -36,21 +36,21 @@ class CNN(torch.nn.Module):
         super(CNN, self).__init__()
         self.keep_prob = 0.5
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1),
             torch.nn.ReLU(),
             torch.nn.MaxPool2d(kernel_size=2, stride=2))
 
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1),
             torch.nn.ReLU(),
             torch.nn.MaxPool2d(kernel_size=2, stride=2))
 
         self.layer3 = torch.nn.Sequential(
-            torch.nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
+            torch.nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
             torch.nn.ReLU(),
             torch.nn.MaxPool2d(kernel_size=2, stride=2, padding=1))
 
-        self.fc1 = torch.nn.Linear(4 * 4 * 128, 625, bias=True)
+        self.fc1 = torch.nn.Linear(4 * 4 * 64, 625, bias=True)
         torch.nn.init.xavier_uniform_(self.fc1.weight)
         self.layer4 = torch.nn.Sequential(
             self.fc1,
