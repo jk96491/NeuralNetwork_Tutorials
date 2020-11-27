@@ -80,6 +80,10 @@ class ResNet(nn.Module):
 
         return x
 
+def resnet10(pretrained=False, **kwargs):
+    model = ResNet(BasicBlock, [1, 1, 1, 1], **kwargs) #=> 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
+    return model
+
 def resnet18(pretrained=False, **kwargs):
     model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs) #=> 2*(2+2+2+2) +1(conv1) +1(fc)  = 16 +2 =resnet 18
     return model
