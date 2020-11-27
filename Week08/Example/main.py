@@ -6,6 +6,7 @@ import torch.nn.parallel
 import torch.utils.data as data
 import torchvision.datasets as datasets
 import torch.optim as optim
+from Advanced.Resnet import ResNet
 
 traindir = '..\\Data\\catdog\\train'
 testdir = '..\\Data\\catdog\\test'
@@ -90,8 +91,8 @@ class Net(nn.Module):
 
 
 if __name__ == '__main__':
-    net = Net()
-
+   # net = Net()
+    net = ResNet.resnet50(3)
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         net = nn.DataParallel(net)
