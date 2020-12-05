@@ -2,7 +2,7 @@ import gym
 import numpy as np
 import matplotlib.pyplot as plt
 from gym.envs.registration import register
-from Week10.Example.Model.frozenModel import RL_MODEL
+from Week10.Model.frozenModel import RL_MODEL
 import torch.optim as optim
 from torch.autograd import Variable
 import torch
