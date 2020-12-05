@@ -8,7 +8,6 @@ import torchvision.datasets as datasets
 import torch.optim as optim
 from Advanced.Resnet import ResNet
 
-# ekdjfksldjfklsdjfklsdfjklsdfjklsd
 
 traindir = '..\\Data\\catdog\\train'
 testdir = '..\\Data\\catdog\\test'
