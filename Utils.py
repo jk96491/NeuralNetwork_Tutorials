@@ -2,6 +2,7 @@ from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 import torch
 
+
 class Tensorboard_Writer:
     def __init__(self, name):
         self.writer = SummaryWriter("./runs/" + name)
