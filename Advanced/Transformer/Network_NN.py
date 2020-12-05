@@ -1,13 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
-from Utils import *
+from Advanced.Transformer import Utils as utils
+
 
 class EncoderLayer(torch.nn.Module):
     def __init__(self, dim_val, dim_attn, n_heads=1):
         super(EncoderLayer, self).__init__()
-        self.attn = MultiHeadAttentionBlock(dim_val, dim_attn, n_heads)
+        self.attn = utils.MultiHeadAttentionBlock(dim_val, dim_attn, n_heads)
         self.fc1 = nn.Linear(dim_val, dim_val)
         self.fc2 = nn.Linear(dim_val, dim_val)
 
@@ -27,8 +27,8 @@ class EncoderLayer(torch.nn.Module):
 class DecoderLayer(torch.nn.Module):
     def __init__(self, dim_val, dim_attn, n_heads=1):
         super(DecoderLayer, self).__init__()
-        self.attn1 = MultiHeadAttentionBlock(dim_val, dim_attn, n_heads)
-        self.attn2 = MultiHeadAttentionBlock(dim_val, dim_attn, n_heads)
+        self.attn1 = utils.MultiHeadAttentionBlock(dim_val, dim_attn, n_heads)
+        self.attn2 = utils.MultiHeadAttentionBlock(dim_val, dim_attn, n_heads)
         self.fc1 = nn.Linear(dim_val, dim_val)
         self.fc2 = nn.Linear(dim_val, dim_val)
 
@@ -64,7 +64,7 @@ class Transformer(torch.nn.Module):
         for i in range(n_decoder_layers):
             self.decs.append(DecoderLayer(dim_val, dim_attn, n_heads))
 
-        self.pos = PositionalEncoding(dim_val)
+        self.pos = utils.PositionalEncoding(dim_val)
 
         # Dense layers for managing network inputs and outputs
         self.enc_input_fc = nn.Linear(input_size, dim_val)

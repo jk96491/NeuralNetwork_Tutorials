@@ -1,10 +1,5 @@
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import numpy as np
-from Network_NN import *
-from Utils import *
-
+from Advanced.Transformer.Network_NN import *
+from Advanced.Transformer import Utils as utils
 
 import matplotlib.pyplot as plt
 
@@ -17,7 +12,7 @@ dim_attn = 5
 lr = 0.002
 epochs = 20
 
-n_heads = 3
+n_heads = 1
 
 n_decoder_layers = 3
 n_encoder_layers = 3
@@ -25,8 +20,8 @@ n_encoder_layers = 3
 batch_size = 15
 
 #init network and optimizer
-t = Transformer(dim_val, dim_attn, 1,dec_seq_len,  output_sequence_length, n_decoder_layers, n_encoder_layers, n_heads)
-optimizer = torch.optim.Adam(t.parameters(), lr=lr)
+transformer = Transformer(dim_val, dim_attn, 1, dec_seq_len,  output_sequence_length, n_decoder_layers, n_encoder_layers, n_heads)
+optimizer = torch.optim.Adam(transformer.parameters(), lr=lr)
 
 #keep track of loss for graph
 losses = []
@@ -45,10 +40,10 @@ for e in range(epochs):
 
     for b in range(-10 - enc_seq_len, 10 - enc_seq_len):
         optimizer.zero_grad()
-        X, Y = get_data(batch_size, enc_seq_len, output_sequence_length)
+        X, Y = utils.get_data(batch_size, enc_seq_len, output_sequence_length)
 
         # Forward pass and calculate loss
-        net_out = t(X)
+        net_out = transformer(X)
         # print(net_out.shape,Y.shape)
         loss = torch.mean((net_out - Y) ** 2)
 
@@ -81,9 +76,9 @@ for i in range(-10, 10, output_sequence_length):
     q = torch.tensor(x).float()
 
     if (output_sequence_length == 1):
-        x[0].append([t(q).detach().squeeze().numpy()])
+        x[0].append([transformer(q).detach().squeeze().numpy()])
     else:
-        for a in t(q).detach().squeeze().numpy():
+        for a in transformer(q).detach().squeeze().numpy():
             x[0].append([a])
 
 ax.clear()

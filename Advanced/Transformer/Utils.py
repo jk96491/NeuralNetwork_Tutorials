@@ -1,20 +1,13 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import numpy as np
 import math
 
 
-def a_norm(Q, K):
+def attention(Q, K, V):
     m = torch.matmul(Q, K.transpose(2, 1).float())
     m /= torch.sqrt(torch.tensor(Q.shape[-1]).float())
 
-    return torch.softmax(m, -1)
-
-
-def attention(Q, K, V):
-    # Attention(Q, K, V) = norm(QK)V
-    a = a_norm(Q, K)  # (batch_size, dim_attn, seq_length)
+    a = torch.softmax(m, -1)
 
     return torch.matmul(a, V)  # (batch_size, seq_length, seq_length)
 
