@@ -12,11 +12,14 @@ class Classifier(nn.Module):
     def __init__(self):
         super().__init__()
         self.layer1 = nn.Sequential(nn.Linear(27, 256),
-                                    nn.ReLU())
+                                    nn.ReLU(),
+                                    nn.Dropout())
         self.layer2 = nn.Sequential(nn.Linear(256, 128),
-                                    nn.ReLU())
+                                    nn.ReLU(),
+                                    nn.Dropout())
         self.layer3 = nn.Sequential(nn.Linear(128, 64),
-                                    nn.ReLU())
+                                    nn.ReLU(),
+                                    nn.Dropout())
         self.layer4 = nn.Sequential(nn.Linear(64, 7))
 
     def forward(self, x):
@@ -68,19 +71,16 @@ for epoch in range(nb_epochs + 1):
         cost.backward()
         optimizer.step()
 
-    # 20번마다 로그 출력
-    if epoch % 1 == 0:
+    correct_count = 0
+    for i in range(test_len):
+        result = torch.argmax(F.softmax(model(x_test[i])))
+        answer = torch.argmax(y_test[i])
 
-        correct_count = 0
-        for i in range(test_len):
-            result = torch.argmax(F.softmax(model(x_test[i])))
-            answer = torch.argmax(y_test[i])
+        if result.item() == answer.item():
+            correct_count += 1
+    accuracy = (correct_count / test_len) * 100
+    print('Epoch {:3d}/{} Cost: {:.3f} accuracy : {:.2f}%'.format( epoch + 1, nb_epochs, cost.item(), accuracy))
 
-            if result.item() == answer.item():
-                correct_count += 1
-        accuracy = (correct_count / test_len) * 100
-        print('Epoch {:3d}/{} Cost: {:.3f} accuracy : {:.2f}%'.format( epoch + 1, nb_epochs, cost.item(), accuracy))
-
-        tensorboard.WriteScalar("loss", epoch, cost)
+    tensorboard.WriteScalar("loss", epoch, cost)
 
 tensorboard.close()
