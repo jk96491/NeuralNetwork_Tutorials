@@ -1,5 +1,5 @@
 import torch
-from Week03.Example.Model import MyModel
+from Week03.Pytorch.Model import MyModel
 import torch.optim as optim
 import random
 from Utils import SuffleData
