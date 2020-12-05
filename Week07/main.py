@@ -34,6 +34,7 @@ data_loader = torch.utils.data.DataLoader(dataset=mnist_train,
 
 
 class CNN(torch.nn.Module):
+
     def __init__(self):
         super(CNN, self).__init__()
         self.keep_prob = 0.5
@@ -74,7 +75,7 @@ class CNN(torch.nn.Module):
 
 
 model = CNN()
-#model = ResNet.resnet152(1)
+#model = ResNet.resnet50(1)
 
 if torch.cuda.device_count() > 1:
     print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -83,10 +84,13 @@ if torch.cuda.device_count() > 1:
 if torch.cuda.is_available():
     model.cuda()
 
+
 criterion = torch.nn.CrossEntropyLoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
+
 total_batch = len(data_loader)
+model.train()
 
 for epoch in range(training_epochs):
     avg_cost = 0
@@ -106,8 +110,7 @@ for epoch in range(training_epochs):
         optimizer.step()
 
         avg_cost += cost / total_batch
-        if index % 10 == 9 or index == 0:
-            print('[{:>2},{:>4}] cost = {:>.4}'.format(epoch + 1, index + 1, cost))
+        print('[{:>2},{:>4}] cost = {:>.4}'.format(epoch + 1, index + 1, cost))
         index += 1
 
     print('[Epoch: {:>4}] avg_cost = {:>.4}'.format(epoch + 1, avg_cost))
