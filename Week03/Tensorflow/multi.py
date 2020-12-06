@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras import Model, optimizers
 import random
+import numpy as np
 from Utils import SuffleData
 
 input_size = 3
@@ -9,7 +10,7 @@ output_size = 1
 hidden_size = 20
 hidden_dim = 128
 
-min_len = 100
+min_len = 50
 max_len = 1000
 normalize = 1
 
@@ -27,8 +28,8 @@ for i in range(max_len):
 
     final_score_list.append([final_score * normalize])
 
-x_train = tf.convert_to_tensor(subject_score_list)
-y_train = tf.convert_to_tensor(final_score_list)
+x_train = np.asarray(subject_score_list)
+y_train = np.asarray(final_score_list)
 
 
 class MyModel(Model):
@@ -36,7 +37,7 @@ class MyModel(Model):
         super(MyModel, self).__init__()
         weight_init = tf.keras.initializers.RandomNormal()
         self.model = tf.keras.Sequential()
-        self.model.add(Dense(1, use_bias=True, kernel_initializer=weight_init))
+        self.model.add(Dense(3, use_bias=True, kernel_initializer=weight_init))
 
     def call(self, x):
         x = self.model(x)
@@ -45,14 +46,12 @@ class MyModel(Model):
 
 model = MyModel()
 
-print(model.summary())
-
 opti = optimizers.Adam(learning_rate=0.001)
 
 nb_epochs = 15000
 for epoch in range(nb_epochs + 1):
     rand = random.randrange(min_len, max_len)
-   # x_train, y_train = SuffleData(x_train, y_train, rand)
+    x_train, y_train = SuffleData(x_train, y_train, rand)
 
     with tf.GradientTape() as Tape:
         prediction = model(x_train)
@@ -62,4 +61,3 @@ for epoch in range(nb_epochs + 1):
     opti.apply_gradients(zip(gradients, model.trainable_variables))
 
     print('Epoch {:4d}/{} Cost: {:.6f}'.format(epoch, nb_epochs, cost))
-    #print(model.layers[0].weight.data[0])
