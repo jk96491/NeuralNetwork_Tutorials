@@ -4,7 +4,7 @@ import torch.optim as optim
 import random
 from Utils import SuffleData
 
-use_cuda = True
+use_cuda = False
 
 input_size = 3
 output_size = 1

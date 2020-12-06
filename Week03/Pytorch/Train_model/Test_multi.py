@@ -1,5 +1,5 @@
 import torch
-from Week03.Example.Model import MyModel
+from Week03.Pytorch.Model import MyModel
 
 input_size = 3
 output_size = 1
