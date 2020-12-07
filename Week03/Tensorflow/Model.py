@@ -10,8 +10,8 @@ class MyModel(Model):
         weight_init = tf.keras.initializers.RandomNormal()
         self.model = tf.keras.Sequential(Dense(1, use_bias=True, kernel_initializer=weight_init, input_shape=(3,)))
 
-        self.opt = tf.optimizers.Adam(learning_rate=0.01)
-        self.model.compile(optimizer=self.opt, loss=self.mse_error)
+        self.optimizer = tf.optimizers.Adam(learning_rate=0.01)
+        self.model.compile(optimizer=self.optimizer, loss=self.mse_error)
         self.build(input_shape=(None, 3))
 
         print(self.model.summary())
@@ -32,7 +32,7 @@ class MyModel(Model):
                         loss = self.mse_error(predict, y)
 
                     gradients = Tape.gradient(loss, self.trainable_variables)
-                    self.opt.apply_gradients(zip(gradients, self.trainable_variables))
+                    self.optimizer.apply_gradients(zip(gradients, self.trainable_variables))
                     if (i + 1) % 100 == 0:
                         print('Epoch {:4d}/{} step{:4d} loss: {:.6f}'.format(ep + 1, epoch, i + 1, loss.numpy()))
 
