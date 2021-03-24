@@ -7,10 +7,11 @@ from Utils import Tensorboard_Writer
 from Utils import SuffleData
 from Utils import normalize
 
-batch_size = 32
-training_len = 1900
+batch_size = 1024
+training_len = 1800
 use_normalize = True
-use_noise = True
+
+device = "cuda:0"
 
 class Classifier(nn.Module):
     def __init__(self):
@@ -37,7 +38,7 @@ class Classifier(nn.Module):
 
 tensorboard = Tensorboard_Writer("Test3")
 
-model = Classifier()
+model = Classifier().to(device)
 
 xy = np.loadtxt('faults.csv', delimiter=',') #1941
 x_data = xy[:, :-7]
@@ -46,8 +47,8 @@ y_data = xy[:, -7:]
 if use_normalize:
     temp = normalize(x_data)
 
-x_data = torch.FloatTensor(x_data)
-y_data = torch.FloatTensor(y_data)
+x_data = torch.FloatTensor(x_data).to(device)
+y_data = torch.FloatTensor(y_data).to(device)
 
 x_data, y_data = SuffleData(x_data, y_data, len(xy))
 
@@ -58,20 +59,15 @@ x_test = x_data[training_len:]
 y_test = y_data[training_len:]
 test_len = len(x_test)
 
-optimizer = optim.Adam(model.parameters(), lr=0.01)
+optimizer = optim.Adam(model.parameters(), lr=0.0005)
 
-nb_epochs = 100000
+nb_epochs = 10000
 
 
 for epoch in range(nb_epochs + 1):
     x_train, y_train = SuffleData(x_train, y_train, batch_size)
 
-    if use_noise:
-        noise = torch.zeros(x_train.size(0), x_train.size(1)).normal_(0, 1)
-    else:
-        noise = torch.zeros_like(x_train)
-
-    hypothesis = model(x_train + noise)
+    hypothesis = model(x_train)
     output = torch.max(y_train, 1)[1]
     cost = F.cross_entropy(hypothesis, output)
 
