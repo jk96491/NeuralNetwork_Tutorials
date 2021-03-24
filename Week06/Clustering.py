@@ -8,6 +8,7 @@ from Utils import normalize
 import random
 
 random_Seed = random.randrange(0, 16546)
+marker = ['o', 's', '^', 'x', '*', 's', 'X']
 
 def train():
     algorithm = "GMM"
@@ -45,7 +46,7 @@ def train():
         marker_ind.append(pandas_data[pandas_data['cluster'] == i].index)
 
     for i in range(n_cluster):
-        plt.scatter(x=pandas_data.loc[marker_ind[i], 'pca_x'], y=pandas_data.loc[marker_ind[i], 'pca_y'], marker='o')
+        plt.scatter(x=pandas_data.loc[marker_ind[i], 'pca_x'], y=pandas_data.loc[marker_ind[i], 'pca_y'], marker=marker[i])
 
     plt.xlabel('PCA 1')
     plt.ylabel('PCA 2')
