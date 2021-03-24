@@ -5,8 +5,12 @@ import torch.optim as optim
 import numpy as np
 from Utils import Tensorboard_Writer
 from Utils import SuffleData
+from Utils import normalize
 
+batch_size = 32
 training_len = 1900
+use_normalize = True
+use_noise = True
 
 class Classifier(nn.Module):
     def __init__(self):
@@ -39,6 +43,9 @@ xy = np.loadtxt('faults.csv', delimiter=',') #1941
 x_data = xy[:, :-7]
 y_data = xy[:, -7:]
 
+if use_normalize:
+    temp = normalize(x_data)
+
 x_data = torch.FloatTensor(x_data)
 y_data = torch.FloatTensor(y_data)
 
@@ -51,15 +58,20 @@ x_test = x_data[training_len:]
 y_test = y_data[training_len:]
 test_len = len(x_test)
 
-optimizer = optim.Adam(model.parameters(), lr=0.0001)
+optimizer = optim.Adam(model.parameters(), lr=0.01)
 
-nb_epochs = 50000
+nb_epochs = 100000
 
 
 for epoch in range(nb_epochs + 1):
-    x_train, y_train = SuffleData(x_train, y_train, 5)
+    x_train, y_train = SuffleData(x_train, y_train, batch_size)
 
-    hypothesis = model(x_train)
+    if use_noise:
+        noise = torch.zeros(x_train.size(0), x_train.size(1)).normal_(0, 1)
+    else:
+        noise = torch.zeros_like(x_train)
+
+    hypothesis = model(x_train + noise)
     output = torch.max(y_train, 1)[1]
     cost = F.cross_entropy(hypothesis, output)
 
@@ -68,7 +80,7 @@ for epoch in range(nb_epochs + 1):
     optimizer.step()
 
     # 20번마다 로그 출력
-    if epoch % 20 == 0:
+    if epoch % 100 == 0:
         print('Epoch {:4d}/{} Cost: {:.6f} '.format(
             epoch, nb_epochs, cost.item(),
         ))
