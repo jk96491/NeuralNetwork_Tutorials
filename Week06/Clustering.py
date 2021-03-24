@@ -5,10 +5,12 @@ from sklearn.decomposition import PCA
 from sklearn.mixture import GaussianMixture
 import numpy as np
 from Utils import normalize
+import random
 
+random_Seed = random.randrange(0, 16546)
 
 def train():
-    algorithm = "K-Means"
+    algorithm = "GMM"
 
     n_cluster = 7
 
@@ -20,9 +22,9 @@ def train():
     pandas_data = pd.DataFrame(data=x_data)
 
     if algorithm == "K-Means":
-        result = KMeans(n_clusters=n_cluster, init='k-means++', max_iter=300, random_state=0).fit(pandas_data).labels_
+        result = KMeans(n_clusters=n_cluster, init='k-means++', max_iter=300, random_state=random_Seed).fit(pandas_data).labels_
     elif algorithm == "GMM":
-        gmm = GaussianMixture(n_components=7, random_state=0)
+        gmm = GaussianMixture(n_components=7, random_state=random_Seed)
         gmm_label = gmm.fit(pandas_data).predict(pandas_data)
         result = gmm_label
     else:
