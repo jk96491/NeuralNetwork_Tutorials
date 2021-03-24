@@ -32,3 +32,14 @@ def convertToTensorInput(input, input_size):
     return torch.FloatTensor(input)
 
 
+def normalize(data):
+    for i in range(len(data[0])):
+        cur_data = data[:, i]
+        min, max = cur_data.min() , cur_data.max()
+        normalize_data = (cur_data - min) / (max - min)
+        data[:, i] = normalize_data
+
+    return data
+
+
+
