@@ -9,6 +9,8 @@ import random
 
 random_Seed = random.randrange(0, 16546)
 marker = ['o', 's', '^', 'x', '*', 's', 'X']
+use_normalize = True
+
 
 def train():
     algorithm = "GMM"
@@ -18,7 +20,8 @@ def train():
     xy = np.loadtxt('faults.csv', delimiter=',') #1941
     x_data = xy[:, :-n_cluster]
 
-    normalize(x_data)
+    if use_normalize:
+        normalize(x_data)
 
     pandas_data = pd.DataFrame(data=x_data)
 
@@ -51,6 +54,7 @@ def train():
     plt.xlabel('PCA 1')
     plt.ylabel('PCA 2')
     plt.title('7 Clusters Visualization by 2 PCA Components({0})'.format(algorithm))
+
     plt.show()
 
 train()

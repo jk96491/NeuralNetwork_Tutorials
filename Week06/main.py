@@ -5,26 +5,27 @@ import torch.optim as optim
 import numpy as np
 from Utils import Tensorboard_Writer
 from Utils import SuffleData
-from Utils import normalize
 
 batch_size = 1024
 training_len = 1800
 use_normalize = True
+drop_out = 0.1
+exclude_cols = [11, 12, 19, 20, 26]
 
-device = "cuda:0"
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 class Classifier(nn.Module):
     def __init__(self):
         super().__init__()
         self.layer1 = nn.Sequential(nn.Linear(27, 128),
                                     nn.ReLU(),
-                                    nn.Dropout())
+                                    nn.Dropout(drop_out))
         self.layer2 = nn.Sequential(nn.Linear(128, 64),
                                     nn.ReLU(),
-                                    nn.Dropout())
+                                    nn.Dropout(drop_out))
         self.layer3 = nn.Sequential(nn.Linear(64, 32),
                                     nn.ReLU(),
-                                    nn.Dropout())
+                                    nn.Dropout(drop_out))
         self.layer4 = nn.Sequential(nn.Linear(32, 7))
 
     def forward(self, x):
@@ -36,6 +37,18 @@ class Classifier(nn.Module):
         return x
 
 
+def normalize(data, exclude_cols_):
+    for i in range(len(data[0])):
+        if exclude_cols_.__contains__(i):
+            continue
+
+        cur_data = data[:, i]
+        min, max = cur_data.min() , cur_data.max()
+        normalize_data = (cur_data - min) / (max - min)
+        data[:, i] = normalize_data
+        data[:, i] = normalize_data
+
+
 tensorboard = Tensorboard_Writer("Test3")
 
 model = Classifier().to(device)
@@ -45,7 +58,7 @@ x_data = xy[:, :-7]
 y_data = xy[:, -7:]
 
 if use_normalize:
-    temp = normalize(x_data)
+    normalize(x_data, exclude_cols)
 
 x_data = torch.FloatTensor(x_data).to(device)
 y_data = torch.FloatTensor(y_data).to(device)
